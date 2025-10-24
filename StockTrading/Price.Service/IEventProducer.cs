@@ -2,5 +2,5 @@
 
 public interface IEventProducer
 {
-    Task PublishEvent(string exchangeName, string routingKey, string message);
+    Task PublishEvent<T>(string queueName, string exchangeName, string routingKey, T message);
 }

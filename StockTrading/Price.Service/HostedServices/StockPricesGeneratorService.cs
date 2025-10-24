@@ -2,7 +2,6 @@
 using Prices.Service.ViewModels;
 using System.Diagnostics;
 using System.Text;
-using System.Text.Json;
 
 namespace Prices.Service.HostedServices
 {
@@ -11,8 +10,10 @@ namespace Prices.Service.HostedServices
         private const long IntervalInSeconds = 1;
         private const int MinValue = 50;
         private const int MaxValue = 50000;
+
+        private const string QueueName = "stock_prices_q";
         private const string ExchangeName = "stock_prices";
-        private const string RoutingKey = "stock_proces_event";
+        private const string RoutingKey = "stock_prices_rk";
 
         private readonly IServiceProvider serviceProvider;
 
@@ -47,12 +48,8 @@ namespace Prices.Service.HostedServices
 
                 PrintData(allStocks);
 
-                string stocksJson = JsonSerializer.Serialize(allStocks);
-
-                await eventProducer.PublishEvent(
-                    ExchangeName, 
-                    RoutingKey,
-                    stocksJson);
+                await eventProducer
+                    .PublishEvent(QueueName, ExchangeName, RoutingKey, allStocks);
 
                 await Task.Delay(
                     TimeSpan.FromSeconds(IntervalInSeconds),
@@ -66,7 +63,7 @@ namespace Prices.Service.HostedServices
             double randomDouble = random.NextDouble();
             double multiplier = randomDouble == 0 ? 1 : randomDouble;
 
-            return value * multiplier;
+            return Math.Round(value * multiplier, 2);
         }
 
         private static void PrintData(IEnumerable<StockViewModel> data)

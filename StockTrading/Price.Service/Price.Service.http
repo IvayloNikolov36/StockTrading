@@ -1,0 +1,6 @@
+@Price.Service_HostAddress = http://localhost:5080
+
+GET {{Price.Service_HostAddress}}/
+Accept: application/json
+
+###

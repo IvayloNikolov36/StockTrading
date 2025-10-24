@@ -4,5 +4,5 @@ namespace Orders.Service.DataServices.Contracts;
 
 public interface IOrdersService
 {
-    Task Create(string userId, OrderCreateViewModel order);
+    Task<OrderCreateResultViewModel> Create(string userId, OrderCreateViewModel order);
 }

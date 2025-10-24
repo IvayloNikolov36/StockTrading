@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Orders.Service;
 using Orders.Service.Data;
 using Orders.Service.DataServices;
 using Orders.Service.DataServices.Contracts;
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<OrdersDbContext>(options =>
 });
 
 builder.Services.AddScoped<IOrdersService, OrdersService>();
+builder.Services.AddScoped<IEventConsumer, EventConsumer>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

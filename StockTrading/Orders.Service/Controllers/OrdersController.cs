@@ -12,20 +12,20 @@ public class OrdersController : ControllerBase
 
     public OrdersController(IOrdersService ordersService)
     {
-        this.ordersService = ordersService;    
+        this.ordersService = ordersService;
     }
 
     [HttpPost]
     [Route("create/{userId:Guid}")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OrderCreateResultViewModel))]
     public async Task<IActionResult> Create(
         [FromRoute] Guid userId,
         [FromBody] OrderCreateViewModel orderDetails)
     {
-        await this.ordersService.Create(
+        OrderCreateResultViewModel order = await this.ordersService.Create(
             userId.ToString(),
             orderDetails);
 
-        return this.Ok();
+        return this.Ok(order);
     }
 }

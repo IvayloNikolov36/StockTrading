@@ -12,15 +12,15 @@ public class OrderEntity : BaseEntity<string>
     }
 
     [Required]
-    public string UserId { get; set; }
+    public required string UserId { get; set; }
 
     public int TickerId { get; set; }
     public StockEntity? Ticker { get; set; }
 
-    [Required]
     [MinLength(1)]
     public int Quantity { get; set; }
 
-    [Required]
+    public double Price { get; set; }
+
     public SideEnum Side { get; set; }
 }

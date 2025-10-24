@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36414.22 d17.14
+VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.Service", "Orders.Service\Orders.Service.csproj", "{7511F577-05B2-4EE3-9D8B-0B5B7F4946BD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Portfolio.Service", "Portfolio\Portfolio.Service.csproj", "{13C8D0F3-BC7D-487E-9858-B4626C0AEED8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prices.Service", "Price.Service\Prices.Service.csproj", "{EF0CC09B-7633-4582-9EC5-DA5AB39FE347}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{13C8D0F3-BC7D-487E-9858-B4626C0AEED8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13C8D0F3-BC7D-487E-9858-B4626C0AEED8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13C8D0F3-BC7D-487E-9858-B4626C0AEED8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF0CC09B-7633-4582-9EC5-DA5AB39FE347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF0CC09B-7633-4582-9EC5-DA5AB39FE347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF0CC09B-7633-4582-9EC5-DA5AB39FE347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0CC09B-7633-4582-9EC5-DA5AB39FE347}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -30,6 +36,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7511F577-05B2-4EE3-9D8B-0B5B7F4946BD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{13C8D0F3-BC7D-487E-9858-B4626C0AEED8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{EF0CC09B-7633-4582-9EC5-DA5AB39FE347} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CF897C4F-549F-4778-9CBC-95B228C8D91A}

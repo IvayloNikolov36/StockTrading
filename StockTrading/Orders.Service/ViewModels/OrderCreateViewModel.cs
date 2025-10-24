@@ -6,17 +6,17 @@ namespace Orders.Service.ViewModels;
 public class OrderCreateViewModel : IValidatableObject
 {
     [Required]
-    public string? Ticker { get; set; }
+    public required string Ticker { get; set; }
 
     [Range(1, int.MaxValue)]
     public int Quantity { get; set; }
 
     [Required]
-    public string? Side { get; set; }
+    public required string Side { get; set; }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
     {
-        string[] sideAllowedValues = Enum.GetNames(typeof(SideEnum));
+        string[] sideAllowedValues = Enum.GetNames<SideEnum>();
         
         if (!sideAllowedValues.Contains(this.Side))
         {

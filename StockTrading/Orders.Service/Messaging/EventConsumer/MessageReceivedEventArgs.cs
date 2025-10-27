@@ -1,0 +1,11 @@
+﻿namespace Orders.Service.Messaging.EventConsumer;
+
+public class MessageReceivedEventArgs : EventArgs
+{
+    public MessageReceivedEventArgs(string message)
+    {
+        this.Message = message;
+    }
+
+    public string Message { get; private set; }
+}

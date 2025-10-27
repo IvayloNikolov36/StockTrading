@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
-using Orders.Service;
 using Orders.Service.Data;
 using Orders.Service.DataServices;
 using Orders.Service.DataServices.Contracts;
 using Orders.Service.Infrastructure.Middlewares;
+using Orders.Service.Messaging.EventConsumer;
+using Orders.Service.Messaging.EventProducer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,7 @@ builder.Services.AddDbContext<OrdersDbContext>(options =>
 
 builder.Services.AddScoped<IOrdersService, OrdersService>();
 builder.Services.AddScoped<IEventConsumer, EventConsumer>();
+builder.Services.AddScoped<IEventProducer, EventProducer>();
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

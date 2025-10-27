@@ -9,6 +9,10 @@
       {
         "Path": "Orders.Service\\Orders.Service.csproj",
         "Action": "Start"
+      },
+      {
+        "Path": "Portfolio\\Portfolio.Service.csproj",
+        "Action": "Start"
       }
     ]
   }

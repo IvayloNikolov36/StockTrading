@@ -1,7 +1,5 @@
 ﻿using Prices.Service.DataServices;
 using Prices.Service.ViewModels;
-using System.Diagnostics;
-using System.Text;
 
 namespace Prices.Service.HostedServices
 {
@@ -46,11 +44,10 @@ namespace Prices.Service.HostedServices
                     stock.Price = this.GetPrice(rnd);
                 }
 
-                PrintData(allStocks);
-
                 await eventProducer
                     .PublishEvent(QueueName, ExchangeName, RoutingKey, allStocks);
 
+                // TODO: find another approach
                 await Task.Delay(
                     TimeSpan.FromSeconds(IntervalInSeconds),
                     stoppingToken);
@@ -64,21 +61,6 @@ namespace Prices.Service.HostedServices
             double multiplier = randomDouble == 0 ? 1 : randomDouble;
 
             return Math.Round(value * multiplier, 2);
-        }
-
-        private static void PrintData(IEnumerable<StockViewModel> data)
-        {
-            StringBuilder output = new();
-
-            foreach (StockViewModel stock in data)
-            {
-                output.AppendLine($"{stock.Ticker}: {stock.Price}");
-            }
-
-            output
-                .AppendLine($"{new string('-', 5)}{DateTime.Now}{new string('-', 5)}");
-
-            Debug.WriteLine(output.ToString());
         }
     }
 }

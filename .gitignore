@@ -57,3 +57,4 @@ StockTrading/.vs/
 StockTrading/Orders.Service/appsettings.json
 StockTrading/Price.Service/appsettings.json
 StockTrading/Price.Service/appsettings.Development.json
+StockTrading/Portfolio/appsettings.json

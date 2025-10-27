@@ -2,19 +2,19 @@
 using RabbitMQ.Client.Events;
 using System.Text;
 
-namespace Orders.Service;
+namespace Orders.Service.Messaging.EventConsumer;
+
+public delegate void OnMessageReceivedEventHandler(EventConsumer eventConsumer, MessageReceivedEventArgs eventArgs);
 
 public class EventConsumer : IEventConsumer
 {
     private readonly string connectionString;
 
-    private readonly Stack<byte[]> messages;
+    private string? message = null;
 
     public EventConsumer(IConfiguration configuration)
     {
-        this.messages = new Stack<byte[]>();
-
-        this.connectionString = configuration
+        connectionString = configuration
             .GetConnectionString("RabbitMqConnection")!;
     }
 
@@ -25,8 +25,7 @@ public class EventConsumer : IEventConsumer
     {
         ConnectionFactory factory = new()
         {
-            Uri = new Uri(this.connectionString),
-            // ConsumerDispatchConcurrency = 2
+            Uri = new Uri(connectionString),
         };
 
         using IConnection connection = await factory.CreateConnectionAsync();
@@ -36,7 +35,8 @@ public class EventConsumer : IEventConsumer
             queueName,
             durable: false,
             exclusive: false,
-            autoDelete: false);
+            autoDelete: false
+        );
 
         AsyncEventingBasicConsumer consumer = new(channel);
 
@@ -45,20 +45,19 @@ public class EventConsumer : IEventConsumer
         await channel
             .BasicConsumeAsync(queueName, autoAck: true, consumer: consumer);
 
-        while (this.messages.Count == 0)
+        while (this.message == null)
         {
             continue;
         }
 
-        string message = Encoding.UTF8.GetString(this.messages.Pop());
-
-        return message;
+        return this.message;
     }
 
     private Task Receive(object model, BasicDeliverEventArgs eventArguments)
     {
         byte[] body = eventArguments.Body.ToArray();
-        this.messages.Push(body);
+
+        string message = Encoding.UTF8.GetString(body);
 
         return Task.CompletedTask;
     }

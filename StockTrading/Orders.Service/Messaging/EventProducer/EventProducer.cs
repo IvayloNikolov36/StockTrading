@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.Json;
 
-namespace Prices.Service;
+namespace Orders.Service.Messaging.EventProducer;
 
 public class EventProducer : IEventProducer
 {
@@ -26,14 +26,14 @@ public class EventProducer : IEventProducer
             Uri = new Uri(this.connectionString)
         };
 
-        using IConnection connection = await factory.CreateConnectionAsync();
-        using IChannel channel = await connection.CreateChannelAsync();
+        IConnection connection = await factory.CreateConnectionAsync();
+        IChannel channel = await connection.CreateChannelAsync();
 
         await channel.ExchangeDeclareAsync(exchangeName, ExchangeType.Direct, durable: true);
 
         await channel.QueueDeclareAsync(
             queueName,
-            durable: false,
+            durable: true,
             exclusive: false,
             autoDelete: false,
             arguments: null);

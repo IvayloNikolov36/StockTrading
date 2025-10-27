@@ -22,9 +22,8 @@ public class OrdersController : ControllerBase
         [FromRoute] Guid userId,
         [FromBody] OrderCreateViewModel orderDetails)
     {
-        OrderCreateResultViewModel order = await this.ordersService.Create(
-            userId.ToString(),
-            orderDetails);
+        OrderCreateResultViewModel order = await this.ordersService
+            .Create(userId.ToString(),orderDetails);
 
         return this.Ok(order);
     }

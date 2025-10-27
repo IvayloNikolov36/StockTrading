@@ -43,7 +43,7 @@ namespace Portfolio.Service.Migrations
                     b.Property<int>("Side")
                         .HasColumnType("integer");
 
-                    b.Property<int>("TickerId")
+                    b.Property<int>("StockId")
                         .HasColumnType("integer");
 
                     b.Property<string>("UserId")
@@ -52,7 +52,7 @@ namespace Portfolio.Service.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TickerId");
+                    b.HasIndex("StockId");
 
                     b.HasIndex("UserId");
 
@@ -181,9 +181,9 @@ namespace Portfolio.Service.Migrations
 
             modelBuilder.Entity("Portfolio.Service.Entities.OrderEntity", b =>
                 {
-                    b.HasOne("Portfolio.Service.Entities.StockEntity", "Ticker")
+                    b.HasOne("Portfolio.Service.Entities.StockEntity", "Stock")
                         .WithMany()
-                        .HasForeignKey("TickerId")
+                        .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -193,7 +193,7 @@ namespace Portfolio.Service.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Ticker");
+                    b.Navigation("Stock");
 
                     b.Navigation("User");
                 });

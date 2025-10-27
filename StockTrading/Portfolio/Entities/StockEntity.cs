@@ -7,10 +7,10 @@ namespace Portfolio.Service.Entities
     {
         [Required]
         [StringLength(10, MinimumLength = 2)]
-        public string? Ticker { get; set; }
+        public required string Ticker { get; set; }
 
         [Required]
         [StringLength(90, MinimumLength = 2)]
-        public string? CompanyName { get; set; }
+        public required string CompanyName { get; set; }
     }
 }

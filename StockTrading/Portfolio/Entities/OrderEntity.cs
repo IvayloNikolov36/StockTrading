@@ -14,8 +14,8 @@ namespace Portfolio.Service.Entities
         public required string UserId { get; set; }
         public UserEntity User { get; set; }
 
-        public int TickerId { get; set; }
-        public StockEntity? Ticker { get; set; }
+        public int StockId { get; set; }
+        public StockEntity Stock { get; set; }
 
         [MinLength(1)]
         public int Quantity { get; set; }

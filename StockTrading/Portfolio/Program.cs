@@ -1,11 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Portfolio.Service.Data;
+using Portfolio.Service.DataServices;
 using Portfolio.Service.HostedServices;
 using Portfolio.Service.Messaging.EventConsumer;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddScoped<IUserPortfolioService, UserPortfolioService>();
 
 builder.Services.AddScoped<IEventConsumer, EventConsumer>();
 

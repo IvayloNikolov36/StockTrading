@@ -8,11 +8,13 @@
       },
       {
         "Path": "Orders.Service\\Orders.Service.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
       },
       {
         "Path": "Portfolio\\Portfolio.Service.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "IIS Express"
       }
     ]
   }

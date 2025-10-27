@@ -50,6 +50,8 @@ public class EventConsumer : IEventConsumer
             continue;
         }
 
+        consumer.ReceivedAsync -= Receive;
+
         return this.message;
     }
 
@@ -57,7 +59,7 @@ public class EventConsumer : IEventConsumer
     {
         byte[] body = eventArguments.Body.ToArray();
 
-        string message = Encoding.UTF8.GetString(body);
+        this.message = Encoding.UTF8.GetString(body);
 
         return Task.CompletedTask;
     }

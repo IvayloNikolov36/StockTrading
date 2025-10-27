@@ -37,14 +37,12 @@ public class OrdersService : IOrdersService
 
     public async Task<OrderCreateResultViewModel> Create(string userId, OrderCreateViewModel order)
     {
-        // TODO: add validation whether the user is able to sell
-
         string message = await this.eventConsumer.ConsumeMessage(QueueName, ExchangeName, RoutingKey);
 
-        IEnumerable<StockViewModel> stocks = JsonSerializer
+        IEnumerable<StockViewModel> stocksWithPrice = JsonSerializer
             .Deserialize<IEnumerable<StockViewModel>>(message)!;
 
-        StockViewModel orderStock = stocks
+        StockViewModel orderStock = stocksWithPrice
             .SingleOrDefault(s => s.Ticker == order.Ticker!.ToUpper())
             ?? throw new ActionableException("Not existing stock with given ticker!");
 
@@ -52,7 +50,7 @@ public class OrdersService : IOrdersService
         {
             UserId = userId,
             Quantity = order.Quantity,
-            TickerId = orderStock.Id,
+            StockId = orderStock.Id,
             Price = orderStock.Price,
             Side = (SideEnum)Enum.Parse(typeof(SideEnum), order.Side!)
         };
